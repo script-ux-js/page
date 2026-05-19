@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Proxy library (blocked ones will be filtered out and replaced every once in a while)</title>
+    <title>Proxies</title>
     <style>
         html, body {
             margin: 0;
             padding: 0;
             height: 100%;
+            background: #f5f5f5;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            color: #333;
         }
         #viewer {
             position: fixed;
@@ -16,9 +19,7 @@
             height: 100%;
             border: none;
             display: none;
-        }
-        #menu {
-            padding: 10px;
+            background: #fff;
         }
         #gate {
             position: fixed;
@@ -26,20 +27,171 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: #fff;
+            background: #e0e0e0;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             z-index: 9999;
         }
+        #gate p {
+            color: #555;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
         #gate input, #gate button {
             font-size: 16px;
             margin: 5px;
-            padding: 6px;
+            padding: 10px 14px;
+            border: 1px solid #bbb;
+            border-radius: 4px;
+            background: #fff;
+            color: #333;
         }
-        #err { color: red; }
+        #gate button {
+            cursor: pointer;
+            background: #555;
+            color: #fff;
+            border: none;
+        }
+        #gate button:hover {
+            background: #444;
+        }
+        #pw {
+            filter: blur(4px);
+            transition: filter 0.2s ease;
+            caret-color: transparent;
+        }
+        #pw:focus {
+            filter: blur(0);
+            caret-color: auto;
+        }
+        #err { 
+            color: #c00; 
+            font-size: 14px;
+            margin-top: 5px;
+        }
+        #app {
+            display: none;
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        #app > p {
+            font-size: 18px;
+            font-weight: 600;
+            color: #444;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #ccc;
+            padding-bottom: 10px;
+        }
+        .proxy-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .proxy-item {
+            background: #fff;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            padding: 14px 16px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: background 0.15s, border-color 0.15s;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .proxy-item:hover {
+            background: #fafafa;
+            border-color: #999;
+        }
+        .status-circle {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+        .status-working { background: #28a745; }
+        .status-slow { background: #ffc107; }
+        .status-down { background: #dc3545; }
+        .proxy-info {
+            flex: 1;
+            min-width: 0;
+        }
+        .proxy-name {
+            font-weight: 600;
+            font-size: 15px;
+            color: #333;
+        }
+        .proxy-desc {
+            font-size: 13px;
+            color: #777;
+            margin-top: 2px;
+        }
+        .proxy-link-box {
+            font-size: 12px;
+            color: #999;
+            margin-top: 4px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .proxy-link-blur {
+            background: #ccc;
+            border-radius: 4px;
+            height: 14px;
+            width: 180px;
+            cursor: pointer;
+            transition: background 0.15s;
+        }
+        .proxy-link-blur:hover {
+            background: #aaa;
+        }
+        .proxy-link-text {
+            display: none;
+            font-size: 12px;
+            color: #666;
+            word-break: break-all;
+        }
+        .proxy-warning {
+            font-size: 12px;
+            color: #c00;
+            background: #ffeaea;
+            border: 1px solid #fcc;
+            border-radius: 4px;
+            padding: 4px 8px;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+        .proxy-notify-badge {
+            font-size: 11px;
+            color: #fff;
+            background: #007bff;
+            border-radius: 4px;
+            padding: 3px 7px;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+        #back-btn {
+            display: none;
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            z-index: 100;
+            padding: 4px 10px;
+            background: #555;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+        #back-btn:hover {
+            background: #444;
+        }
     </style>
+<base target="_blank">
 <base target="_blank">
 </head>
 <body>
@@ -53,62 +205,52 @@
 </div>
 
 <!-- Main App (hidden until unlocked) -->
-<div id="app" style="display:none;">
-    <p>Proxy library (blocked ones will be filtered out and replaced every once in a while)</p>
+<div id="app">
+    <p>Proxy list (will be filtered and new ones will be added soon.)</p>
 
-    <div id="menu">
-        <button onclick="loadProxy(0)">daydream</button>
-        <button onclick="loadProxy(1)">fern</button>
-        <button onclick="loadProxy(2)">Lunaar</button>
-        <button onclick="loadProxy(3)">shadow 1</button>
-        <button onclick="loadProxy(4)">shadow 2</button>
-        <button onclick="loadProxy(5)">shadow 3</button>
-        <button onclick="loadProxy(6)">shadow 4</button>
-        <button onclick="loadProxy(7)">infamous 1</button>
-        <button onclick="loadProxy(8)">infamous 2</button>
-        <button onclick="loadProxy(9)">infamous 3</button>
-        <button onclick="loadProxy(10)">infamous 4</button>
-        <button onclick="loadProxy(11)">infamous 5</button>
-    </div>
+    <ul class="proxy-list" id="proxyList"></ul>
 
     <iframe id="viewer"></iframe>
-
-    <div id="links" style="display:none;">
-        <span>https://cdn.jsdelivr.net/gh/NightProxy/DD-Static/dist/index.svg</span>
-        <span>https://freesciencelessons.org/</span>
-        <span>https://late-registration.b-cdn.net/</span>
-        <span>https://prepforfinals.b-cdn.net/</span>
-        <span>https://larpedu.b-cdn.net/</span>
-        <span>https://howtolarp2026.b-cdn.net/</span>
-        <span>https://thelarpfoundation.b-cdn.net/</span>
-        <span>https://hyperflux7009.b-cdn.net/</span>
-        <span>https://brightpath9413.b-cdn.net/</span>
-        <span>https://sharpvolt4430.b-cdn.net/</span>
-        <span>https://brightflux9532.b-cdn.net/</span>
-        <span>https://superweb2072.b-cdn.net/</span>
-    </div>
+    <button id="back-btn" onclick="showList()">← Back</button>
 </div>
 
 <script>
-var batteryLevel = null;
+// ============ EDITABLE PROXY DATA ============
+// status: "working" (green), "slow" (yellow), "down" (red)
+// openIn: "iframe" (loads inside page) or "redirect" (opens in new window)
+// notify: set to any text string to show an alert before opening, or "" for none
+var proxies = [
+    { name: "Infamous",            url: "https://valoq.naturesciencenews.com/",                                  status: "working", desc: "General proxy",               openIn: "iframe",   notify: "" },
+    { name: "Xylora",              url: "https://xylora.huangqirui.xyz/",                                        status: "working", desc: "General proxy",               openIn: "iframe",   notify: "" },
+    { name: "Ford",                url: "https://greatest.huangqirui.xyz/",                                      status: "working", desc: "General proxy",               openIn: "iframe",   notify: "" },
+    { name: "Tung Tung",           url: "https://vcsa.huangqirui.xyz/",                                          status: "working", desc: "General proxy",               openIn: "iframe",   notify: "" },
+    { name: "T9",                  url: "https://matheducation2day.b-cdn.net/class",                             status: "working", desc: "Recommended proxy",           openIn: "iframe",   notify: "" },
+    { name: "Yuki - quantil",      url: "https://quantil.jsdelivr.net/gh/reeyuki/YukiOsSingleHtml@main/yukios.svg", status: "working", desc: "Recommended proxy",           openIn: "redirect", notify: "" },
+    { name: "Yuki - originfastly", url: "https://originfastly.jsdelivr.net/gh/reeyuki/YukiOsSingleHtml@main/yukios.svg", status: "working", desc: "Recommended proxy",     openIn: "redirect", notify: "" },
+    { name: "Yuki - esm",          url: "https://esm.sh/gh/reeyuki/YukiOsSingleHtml@64a4f9f/yukios.svg",         status: "working", desc: "Recommended proxy",           openIn: "iframe",   notify: "" },
+    { name: "Yuki - gcore",        url: "https://gcore.jsdelivr.net/gh/reeyuki/YukiOsSingleHtml@main/yukios.svg", status: "working", desc: "Recommended proxy",           openIn: "redirect", notify: "" },
+    { name: "Yuki - staticdelivr", url: "https://cdn.staticdelivr.com/gh/reeyuki/YukiOsSingleHtml/main/yukios.svg", status: "working", desc: "Recommended proxy",   openIn: "iframe",   notify: "" },
+    { name: "Yuki - jsdelivr",     url: "https://cdn.jsdelivr.net/gh/reeyuki/YukiOsSingleHtml@main/yukios.svg",  status: "working", desc: "Recommended proxy",           openIn: "redirect", notify: "" },
+    { name: "Fern",                url: "https://s3.amazonaws.com/angelfern/index.html",                         status: "working", desc: "General proxy",               openIn: "iframe",   notify: "" },
+    { name: "DayDream",            url: "https://cdn.jsdelivr.net/gh/NightProxy/DD-Static/dist/index.svg",       status: "working", desc: "General proxy",               openIn: "redirect", notify: "" },
+    { name: "rammerhead",          url: "https://w.uc.simpletextpad.org/",                                       status: "working", desc: "General proxy",               openIn: "iframe",   notify: "When you open this proxy, type in rba1212 to open it (password)" }
+];
+// =============================================
 
 if (localStorage.getItem('proxies_unlocked') === 'true') {
     showApp();
-} else {
-    if ('getBattery' in navigator) {
-        navigator.getBattery().then(function(b) {
-            batteryLevel = Math.round(b.level * 100);
-        }).catch(function() {
-            document.getElementById('err').innerText = 'Battery read failed. Try 100.';
-        });
-    } else {
-        document.getElementById('err').innerText = 'Battery API unavailable. Try 100.';
-    }
+}
+
+function getTimePassword() {
+    var now = new Date();
+    var h = now.getHours();
+    var m = now.getMinutes();
+    return h + ':' + (m < 10 ? '0' + m : m);
 }
 
 function unlock() {
     var input = document.getElementById('pw').value.trim();
-    var expected = batteryLevel !== null ? String(batteryLevel) : '100';
+    var expected = getTimePassword();
     if (input === expected) {
         localStorage.setItem('proxies_unlocked', 'true');
         showApp();
@@ -120,15 +262,112 @@ function unlock() {
 function showApp() {
     document.getElementById('gate').style.display = 'none';
     document.getElementById('app').style.display = 'block';
+    renderList();
+}
+
+function renderList() {
+    var list = document.getElementById('proxyList');
+    list.innerHTML = '';
+    proxies.forEach(function(proxy, index) {
+        var li = document.createElement('li');
+        li.className = 'proxy-item';
+        li.onclick = function(e) {
+            if (e.target.closest('.proxy-link-blur')) return;
+            loadProxy(index);
+        };
+
+        var circle = document.createElement('span');
+        circle.className = 'status-circle status-' + proxy.status;
+
+        var info = document.createElement('div');
+        info.className = 'proxy-info';
+
+        var name = document.createElement('div');
+        name.className = 'proxy-name';
+        name.textContent = proxy.name;
+
+        var desc = document.createElement('div');
+        desc.className = 'proxy-desc';
+        desc.textContent = proxy.desc;
+
+        var linkBox = document.createElement('div');
+        linkBox.className = 'proxy-link-box';
+        linkBox.innerHTML = '<span>Link:</span>';
+
+        var blurBox = document.createElement('div');
+        blurBox.className = 'proxy-link-blur';
+        blurBox.dataset.index = index;
+        blurBox.onclick = function(e) {
+            e.stopPropagation();
+            revealLink(index, blurBox, textSpan);
+        };
+
+        var textSpan = document.createElement('span');
+        textSpan.className = 'proxy-link-text';
+        textSpan.textContent = proxy.url;
+
+        linkBox.appendChild(blurBox);
+        linkBox.appendChild(textSpan);
+
+        info.appendChild(name);
+        info.appendChild(desc);
+        info.appendChild(linkBox);
+        li.appendChild(circle);
+        li.appendChild(info);
+
+        if (proxy.openIn === 'redirect') {
+            var warn = document.createElement('span');
+            warn.className = 'proxy-warning';
+            warn.textContent = '⚠ Opens in new tab';
+            li.appendChild(warn);
+        }
+
+        if (proxy.notify && proxy.notify.trim() !== '') {
+            var badge = document.createElement('span');
+            badge.className = 'proxy-notify-badge';
+            badge.textContent = 'ℹ Notify';
+            li.appendChild(badge);
+        }
+
+        list.appendChild(li);
+    });
+}
+
+function revealLink(index, blurBox, textSpan) {
+    var input = prompt('Enter password to reveal link:');
+    if (input === null) return;
+    var expected = getTimePassword();
+    if (input.trim() === expected) {
+        blurBox.style.display = 'none';
+        textSpan.style.display = 'inline';
+    } else {
+        alert('Wrong password. Hint: current time (e.g., ' + expected + ')');
+    }
 }
 
 function loadProxy(index) {
-    var links = document.getElementById("links").children;
-    var url = links[index].innerText;
-    document.getElementById("menu").style.display = "none";
-    var viewer = document.getElementById("viewer");
-    viewer.style.display = "block";
-    viewer.src = url;
+    var proxy = proxies[index];
+    if (proxy.notify && proxy.notify.trim() !== '') {
+        alert(proxy.notify);
+    }
+    if (proxy.openIn === 'redirect') {
+        window.open(proxy.url, '_blank');
+        return;
+    }
+    document.getElementById('proxyList').style.display = 'none';
+    document.getElementById('app').querySelector('p').style.display = 'none';
+    var viewer = document.getElementById('viewer');
+    viewer.style.display = 'block';
+    viewer.src = proxy.url;
+    document.getElementById('back-btn').style.display = 'block';
+}
+
+function showList() {
+    document.getElementById('viewer').style.display = 'none';
+    document.getElementById('viewer').src = '';
+    document.getElementById('proxyList').style.display = 'block';
+    document.getElementById('app').querySelector('p').style.display = 'block';
+    document.getElementById('back-btn').style.display = 'none';
 }
 
 document.getElementById('pw').addEventListener('keypress', function(e) {
