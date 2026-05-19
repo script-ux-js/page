@@ -1,1 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Proxy library (blocked ones will be filtered out and replaced every once in a while)</title>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+        #viewer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+            display: none;
+        }
+        #menu {
+            padding: 10px;
+        }
+        #gate {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+        }
+        #gate input, #gate button {
+            font-size: 16px;
+            margin: 5px;
+            padding: 6px;
+        }
+        #err { color: red; }
+    </style>
+</head>
+<body>
 
+<!-- Password Gate -->
+<div id="gate">
+    <p>Enter password to continue.</p>
+    <input type="password" id="pw" placeholder="Password">
+    <button onclick="unlock()">Unlock</button>
+    <p id="err"></p>
+</div>
+
+<!-- Main App (hidden until unlocked) -->
+<div id="app" style="display:none;">
+    <p>Proxy library (blocked ones will be filtered out and replaced every once in a while)</p>
+
+    <div id="menu">
+        <button onclick="loadProxy(0)">daydream</button>
+        <button onclick="loadProxy(1)">fern</button>
+        <button onclick="loadProxy(2)">Lunaar</button>
+        <button onclick="loadProxy(3)">shadow 1</button>
+        <button onclick="loadProxy(4)">shadow 2</button>
+        <button onclick="loadProxy(5)">shadow 3</button>
+        <button onclick="loadProxy(6)">shadow 4</button>
+        <button onclick="loadProxy(7)">infamous 1</button>
+        <button onclick="loadProxy(8)">infamous 2</button>
+        <button onclick="loadProxy(9)">infamous 3</button>
+        <button onclick="loadProxy(10)">infamous 4</button>
+        <button onclick="loadProxy(11)">infamous 5</button>
+    </div>
+
+    <iframe id="viewer"></iframe>
+
+    <div id="links" style="display:none;">
+        <span>https://cdn.jsdelivr.net/gh/NightProxy/DD-Static/dist/index.svg</span>
+        <span>https://freesciencelessons.org/</span>
+        <span>https://late-registration.b-cdn.net/</span>
+        <span>https://prepforfinals.b-cdn.net/</span>
+        <span>https://larpedu.b-cdn.net/</span>
+        <span>https://howtolarp2026.b-cdn.net/</span>
+        <span>https://thelarpfoundation.b-cdn.net/</span>
+        <span>https://hyperflux7009.b-cdn.net/</span>
+        <span>https://brightpath9413.b-cdn.net/</span>
+        <span>https://sharpvolt4430.b-cdn.net/</span>
+        <span>https://brightflux9532.b-cdn.net/</span>
+        <span>https://superweb2072.b-cdn.net/</span>
+    </div>
+</div>
+
+<script>
+var batteryLevel = null;
+
+if (localStorage.getItem('proxies_unlocked') === 'true') {
+    showApp();
+} else {
+    if ('getBattery' in navigator) {
+        navigator.getBattery().then(function(b) {
+            batteryLevel = Math.round(b.level * 100);
+        }).catch(function() {
+            document.getElementById('err').innerText = 'Battery read failed. Try 100.';
+        });
+    } else {
+        document.getElementById('err').innerText = 'Battery API unavailable. Try 100.';
+    }
+}
+
+function unlock() {
+    var input = document.getElementById('pw').value.trim();
+    var expected = batteryLevel !== null ? String(batteryLevel) : '100';
+    if (input === expected) {
+        localStorage.setItem('proxies_unlocked', 'true');
+        showApp();
+    } else {
+        document.getElementById('err').innerText = 'Wrong password.';
+    }
+}
+
+function showApp() {
+    document.getElementById('gate').style.display = 'none';
+    document.getElementById('app').style.display = 'block';
+}
+
+function loadProxy(index) {
+    var links = document.getElementById("links").children;
+    var url = links[index].innerText;
+    document.getElementById("menu").style.display = "none";
+    var viewer = document.getElementById("viewer");
+    viewer.style.display = "block";
+    viewer.src = url;
+}
+
+document.getElementById('pw').addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') unlock();
+});
+</script>
+
+</body>
+</html>
