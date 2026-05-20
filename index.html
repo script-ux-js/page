@@ -245,6 +245,8 @@ function getTimePassword() {
     var now = new Date();
     var h = now.getHours();
     var m = now.getMinutes();
+    h = h % 12;
+    h = h ? h : 12;
     return h + ':' + (m < 10 ? '0' + m : m);
 }
 
