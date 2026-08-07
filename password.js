@@ -9,5 +9,5 @@ function checkPassword(input) {
 
     var password = h + ":" + (m < 10 ? "0" + m : m);
 
-    return input.trim() === password;
+    return input === password;
 }
