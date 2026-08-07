@@ -1,7 +1,7 @@
 [
   {
     "name": "Infamous",
-    "url": "[https://valoq.naturesciencenews.com/](https://valoq.naturesciencenews.com/)",
+    "url": "https://valoq.naturesciencenews.com/",
     "status": "working",
     "desc": "General proxy",
     "openIn": "iframe",
@@ -9,7 +9,7 @@
   },
   {
     "name": "Xylora",
-    "url": "[https://xylora.huangqirui.xyz/](https://xylora.huangqirui.xyz/)",
+    "url": "https://xylora.huangqirui.xyz/",
     "status": "working",
     "desc": "General proxy",
     "openIn": "iframe",
@@ -17,7 +17,7 @@
   },
   {
     "name": "Ford",
-    "url": "[https://greatest.huangqirui.xyz/](https://greatest.huangqirui.xyz/)",
+    "url": "https://greatest.huangqirui.xyz/",
     "status": "working",
     "desc": "General proxy",
     "openIn": "iframe",
@@ -25,7 +25,7 @@
   },
   {
     "name": "Tung Tung",
-    "url": "[https://vcsa.huangqirui.xyz/](https://vcsa.huangqirui.xyz/)",
+    "url": "https://vcsa.huangqirui.xyz/",
     "status": "working",
     "desc": "General proxy",
     "openIn": "iframe",
@@ -33,7 +33,7 @@
   },
   {
     "name": "T9",
-    "url": "[https://matheducation2day.b-cdn.net/class](https://matheducation2day.b-cdn.net/class)",
+    "url": "https://matheducation2day.b-cdn.net/class",
     "status": "working",
     "desc": "Recommended proxy",
     "openIn": "iframe",
@@ -41,7 +41,7 @@
   },
   {
     "name": "Yuki - quantil",
-    "url": "[https://quantil.jsdelivr.net/gh/reeyuki/YukiOsSingleHtml@main/yukios.svg](https://quantil.jsdelivr.net/gh/reeyuki/YukiOsSingleHtml@main/yukios.svg)",
+    "url": "https://quantil.jsdelivr.net/gh/reeyuki/YukiOsSingleHtml@main/yukios.svg",
     "status": "working",
     "desc": "Recommended proxy",
     "openIn": "redirect",
@@ -49,7 +49,7 @@
   },
   {
     "name": "Yuki - originfastly",
-    "url": "[https://originfastly.jsdelivr.net/gh/reeyuki/YukiOsSingleHtml@main/yukios.svg](https://originfastly.jsdelivr.net/gh/reeyuki/YukiOsSingleHtml@main/yukios.svg)",
+    "url": "https://originfastly.jsdelivr.net/gh/reeyuki/YukiOsSingleHtml@main/yukios.svg",
     "status": "working",
     "desc": "Recommended proxy",
     "openIn": "redirect",
@@ -57,7 +57,7 @@
   },
   {
     "name": "Yuki - esm",
-    "url": "[https://esm.sh/gh/reeyuki/YukiOsSingleHtml@64a4f9f/yukios.svg](https://esm.sh/gh/reeyuki/YukiOsSingleHtml@64a4f9f/yukios.svg)",
+    "url": "https://esm.sh/gh/reeyuki/YukiOsSingleHtml@64a4f9f/yukios.svg",
     "status": "working",
     "desc": "Recommended proxy",
     "openIn": "iframe",
@@ -65,7 +65,7 @@
   },
   {
     "name": "Yuki - gcore",
-    "url": "[https://gcore.jsdelivr.net/gh/reeyuki/YukiOsSingleHtml@main/yukios.svg](https://gcore.jsdelivr.net/gh/reeyuki/YukiOsSingleHtml@main/yukios.svg)",
+    "url": "https://gcore.jsdelivr.net/gh/reeyuki/YukiOsSingleHtml@main/yukios.svg",
     "status": "working",
     "desc": "Recommended proxy",
     "openIn": "redirect",
@@ -73,7 +73,7 @@
   },
   {
     "name": "Yuki - staticdelivr",
-    "url": "[https://cdn.staticdelivr.com/gh/reeyuki/YukiOsSingleHtml/main/yukios.svg](https://cdn.staticdelivr.com/gh/reeyuki/YukiOsSingleHtml/main/yukios.svg)",
+    "url": "https://cdn.staticdelivr.com/gh/reeyuki/YukiOsSingleHtml/main/yukios.svg",
     "status": "working",
     "desc": "Recommended proxy",
     "openIn": "iframe",
@@ -81,7 +81,7 @@
   },
   {
     "name": "Yuki - jsdelivr",
-    "url": "[https://cdn.jsdelivr.net/gh/reeyuki/YukiOsSingleHtml@main/yukios.svg](https://cdn.jsdelivr.net/gh/reeyuki/YukiOsSingleHtml@main/yukios.svg)",
+    "url": "https://cdn.jsdelivr.net/gh/reeyuki/YukiOsSingleHtml@main/yukios.svg",
     "status": "working",
     "desc": "Recommended proxy",
     "openIn": "redirect",
@@ -89,7 +89,7 @@
   },
   {
     "name": "Fern",
-    "url": "[https://s3.amazonaws.com/angelfern/index.html](https://s3.amazonaws.com/angelfern/index.html)",
+    "url": "https://s3.amazonaws.com/angelfern/index.html",
     "status": "working",
     "desc": "General proxy",
     "openIn": "iframe",
@@ -97,7 +97,7 @@
   },
   {
     "name": "DayDream",
-    "url": "[https://cdn.jsdelivr.net/gh/NightProxy/DD-Static/dist/index.svg](https://cdn.jsdelivr.net/gh/NightProxy/DD-Static/dist/index.svg)",
+    "url": "https://cdn.jsdelivr.net/gh/NightProxy/DD-Static/dist/index.svg",
     "status": "working",
     "desc": "General proxy",
     "openIn": "redirect",
@@ -105,7 +105,7 @@
   },
   {
     "name": "rammerhead",
-    "url": "[https://w.uc.simpletextpad.org/](https://w.uc.simpletextpad.org/)",
+    "url": "https://w.uc.simpletextpad.org/",
     "status": "working",
     "desc": "General proxy",
     "openIn": "redirect",
