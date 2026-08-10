@@ -1,74 +1,10 @@
 [
   {
-    "name": "Infamous",
-    "url": "https://valoq.naturesciencenews.com/",
-    "status": "working",
-    "desc": "General proxy",
-    "openIn": "iframe",
-    "notify": ""
-  },
-  {
-    "name": "Xylora",
-    "url": "https://xylora.huangqirui.xyz/",
-    "status": "working",
-    "desc": "General proxy",
-    "openIn": "iframe",
-    "notify": ""
-  },
-  {
-    "name": "Ford",
-    "url": "https://greatest.huangqirui.xyz/",
-    "status": "working",
-    "desc": "General proxy",
-    "openIn": "iframe",
-    "notify": ""
-  },
-  {
-    "name": "Tung Tung",
-    "url": "https://vcsa.huangqirui.xyz/",
-    "status": "working",
-    "desc": "General proxy",
-    "openIn": "iframe",
-    "notify": ""
-  },
-  {
-    "name": "T9",
-    "url": "https://matheducation2day.b-cdn.net/class",
-    "status": "working",
-    "desc": "Recommended proxy",
-    "openIn": "iframe",
-    "notify": ""
-  },
-  {
-    "name": "Yuki - quantil",
-    "url": "https://quantil.jsdelivr.net/gh/reeyuki/YukiOsSingleHtml@main/yukios.svg",
-    "status": "working",
-    "desc": "Recommended proxy",
-    "openIn": "redirect",
-    "notify": ""
-  },
-  {
-    "name": "Yuki - originfastly",
-    "url": "https://originfastly.jsdelivr.net/gh/reeyuki/YukiOsSingleHtml@main/yukios.svg",
-    "status": "working",
-    "desc": "Recommended proxy",
-    "openIn": "redirect",
-    "notify": ""
-  },
-  {
     "name": "Yuki - esm",
     "url": "https://esm.sh/gh/reeyuki/YukiOsSingleHtml@64a4f9f/yukios.svg",
     "status": "working",
     "desc": "Recommended proxy",
     "openIn": "iframe",
-    "notify": ""
-  },
-  {
-    "name": "Yuki - gcore",
-    "url": "https://gcore.jsdelivr.net/gh/reeyuki/YukiOsSingleHtml@main/yukios.svg",
-    "status": "working",
-    "desc": "Recommended proxy",
-    "openIn": "redirect",
     "notify": ""
   },
   {
@@ -78,37 +14,5 @@
     "desc": "Recommended proxy",
     "openIn": "iframe",
     "notify": ""
-  },
-  {
-    "name": "Yuki - jsdelivr",
-    "url": "https://cdn.jsdelivr.net/gh/reeyuki/YukiOsSingleHtml@main/yukios.svg",
-    "status": "working",
-    "desc": "Recommended proxy",
-    "openIn": "redirect",
-    "notify": ""
-  },
-  {
-    "name": "Fern",
-    "url": "https://s3.amazonaws.com/angelfern/index.html",
-    "status": "working",
-    "desc": "General proxy",
-    "openIn": "iframe",
-    "notify": ""
-  },
-  {
-    "name": "DayDream",
-    "url": "https://cdn.jsdelivr.net/gh/NightProxy/DD-Static/dist/index.svg",
-    "status": "working",
-    "desc": "General proxy",
-    "openIn": "redirect",
-    "notify": ""
-  },
-  {
-    "name": "rammerhead",
-    "url": "https://w.uc.simpletextpad.org/",
-    "status": "working",
-    "desc": "General proxy",
-    "openIn": "redirect",
-    "notify": "When you open this proxy, type in rba1212 to open it (password)"
   }
 ]
