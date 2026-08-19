@@ -1,8 +1,8 @@
 [
   {
     "name": "Flappy Bird",
-    "url": "https://cdn.jsdelivr.net/gh/script-ux-js/pagegames/main/flappy/flappy-bird.html",
-    "icon": "https://cdn.jsdelivr.net/gh/script-ux-js/pagegames/main/flappy/icon.png",
+    "url": "https://cdn.jsdelivr.net/gh/script-ux-js/pagegames@main/flappy/index.html",
+    "icon": "https://cdn.jsdelivr.net/gh/script-ux-js/pagegames@main/flappy/icon.jpg",
     "desc": "Take flight as a bird!"
   }
 ]
